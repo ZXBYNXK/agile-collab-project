@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/DariusRain/agile-collab-project/issues"
   },
-  "homepage": "https://github.com/DariusRain/agile-collab-project#readme"
+  "homepage": "https://github.com/DariusRain/agile-collab-project#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.4",
+    "nodemon": "^2.0.2",
+    "pug": "^2.0.4"
+  }
 }

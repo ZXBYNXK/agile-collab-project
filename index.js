@@ -4,12 +4,16 @@ const app = express();
 const DB_CONNECTION = process.env.DB_CONNECTION;
 const PORT = process.env.PORT;
 const enviroment =  process.env.NODE_ENV
-const graduatesRoute = require('./routes/jzgraduates');   
+const graduatesRoute = require('./routes/graduateRoutes');
+const articleRoute = require('./routes/articleRoutes');
+
 enviroment.toLowerCase()
 
 app.use(express.json());
 
-app.use('/jzgraduates', graduatesRoute) .
+app.use('/graduateRoutes', graduatesRoute)
+app.use('/articleRoutes', articleRoute)
+
 
 app.get('/', (req, res) => {
     res.status(200).render('index')

@@ -3,15 +3,20 @@ const mongoose = require('mongoose');
 const graduateSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        require: true
+        required: true
     },
     lastName: {
         type: String,
-        require: true
+        required: true
+    },
+    profession:{
+        type: String,
+        default: 'none'
     },
     email: {
         type: String,
-        require: true
+        required: true,
+        unique: true
     }
 });
 

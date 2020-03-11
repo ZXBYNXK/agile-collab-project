@@ -32,6 +32,7 @@
             
 });
     ```
+    
 2. Created graduateRoutes.js
     - Added GET & POST routes for the Graduates collection which refers to the <a href="https://github.com/DariusRain/agile-collab-project/blob/master/models/Graduate.js">models/Graduate.js</a> model.
     ```javascript 

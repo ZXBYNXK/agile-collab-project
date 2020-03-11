@@ -12,9 +12,6 @@ const graduateSchema = new mongoose.Schema({
     email: {
         type: String,
         require: true
-    },
-    profession: {
-        type: String
     }
 });
 

@@ -6,7 +6,8 @@ const Article = require("../models/Article");
 router.get("/", async (req, res) => {
     try {
         const article = await Article.find();
-        res.json(article);
+        res.status(200).json(article);
+        // #1 DR: Added status code to the response - Not major but prefreable 
     } catch (err) {
         res.status(500).json({message: err.message});
     }
@@ -29,5 +30,7 @@ router.post("/", async (req, res) => {
     }
         
 });
+
+
 
 module.exports = router;

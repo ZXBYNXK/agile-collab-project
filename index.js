@@ -14,6 +14,8 @@ app.use(express.json());
 app.use('/graduateRoutes', graduatesRoute)
 app.use('/articleRoutes', articleRoute)
 
+app.use(express.static("public"));
+
 
 app.get('/', (req, res) => {
     res.status(200).render('index')

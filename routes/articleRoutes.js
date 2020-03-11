@@ -17,14 +17,14 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     const{graduateName, profession, message}=req.body; 
     const article = new Article({
-        graduateName,
-        profession,
-        message
+        graduateName: graduateName,
+        profession: profession,
+        message: message
     });
 
     try {
         const newArticle = await article.save();
-        res.status(201).json(newArticles);
+        res.status(201).json(newArticle);
     } catch (err) {
         res.status(401).json({message: err.message});
     }

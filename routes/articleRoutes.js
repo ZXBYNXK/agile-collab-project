@@ -13,6 +13,13 @@ router.get("/", async (req, res) => {
     }
 } )
 
+//Getting one article
+router.get("/:id",getArticle, (req,res)=> {
+    res.json(res.article)
+});
+
+
+
 //Create new article
 router.post("/", async (req, res) => {
     const{graduateName, profession, message}=req.body; 
@@ -30,7 +37,8 @@ router.post("/", async (req, res) => {
     }
         
 });
-
+//Delete one article
+router.delete()
 
 
 

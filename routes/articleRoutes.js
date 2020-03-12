@@ -38,7 +38,14 @@ router.post("/", async (req, res) => {
         
 });
 //Delete one article
-router.delete()
+router.delete("/:id", getArticle,async (req,res)=> {
+    try {
+        await res.article.remove();
+        res.json({ message: "deleted article"});
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+});
 
 
 

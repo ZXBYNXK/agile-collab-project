@@ -1,12 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Graduate API</title>
     <script src="script.js"></script>
-    <title>Document</title>
-</head>
-<body style="background-color: orange;">
-    
-</body>
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+  </head>
+
+  <body>
+    <h1>Sign up below to join our Graduate News Page!</h1>
+    <div class="container">
+      <form>
+        <h2>Create Your Graduate profile</h2>
+        <label for="firstName">First Name:</label><br />
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          placeholder="First Name"
+        />
+        <br />
+        <label for="lastName">Last Name:</label><br />
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          placeholder="Last name"
+        />
+        <br />
+        <label for="graduationYear">Graduation Year:</label><br />
+        <input
+          type="text"
+          id="graduationYear"
+          name="graduationYear"
+          placeholder="e.g. 2019"
+        />
+        <br />
+        <label for="profession">List Your Profession</label><br />
+        <input
+          type="text"
+          id="profession"
+          name="profession"
+          placeholder="e.g. Banker, Programmer"
+        />
+        <br />
+        <label for="companyName">Company:</label><br />
+        <input
+          type="text"
+          id="companyName"
+          name="companyName"
+          placeholder="Company Name"
+        />
+        <br />
+        <label for="keySkills">Skills:</label><br />
+        <textarea class="u-full-width" 
+        type="text" id="keySkills" 
+        name="keySkills" 
+        placeholder="List skills that you are proud of"></textarea>
+        <br />
+        <label for="linkedIn">Your LinkedIn Profile:</label><br />
+        <input
+          type="text"
+          id="linkedIn"
+          name="linkedIn"
+          placeholder="LinkedIn profile Link"
+        />
+        <br />
+        <label for="twitter">Twitter:</label><br />
+        <input
+          type="text"
+          id="twitter"
+          name="twitter"
+          placeholder="Twitter profile Link"
+        />
+        <br /><br />
+        <button
+          type="submit"
+          id="post-btn"
+          onclick="createNewGraduate()"
+          value="submit"
+        >
+          Submit Form
+        </button>
+
+        <div id="registered"></div>
+      </form>
+      <h2>Find a Graduate</h2>
+      <form class="example">
+        <input type="text" placeholder="Enter Graduate's Name" name="search" />
+        <button type="submit">Search</button>
+      </form>
+      <h2>Show All Graduates</h2>
+      <button type="submit" id="get-btn" onclick="getAllGraduates()">
+        Click here
+      </button>
+      <div id="results"></div>
+    </div>
+  </body>
 </html>

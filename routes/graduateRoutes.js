@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Graduate = require("../models/graduate");
-
+const Graduate = require("../models/Graduate");
+// DR: Capitalized graduate file name in the require above
 
 router.get("/", async (req, res) => {
     try {
         const graduates = await Graduate.find();
         res.status(200).json(graduates);
-    // #1 DR: Added a status code to be returned to the client/browser
+
     } catch (err) {
         res.status(500).json({
             message: err.message
@@ -17,13 +17,14 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
+   
     const graduate = new Graduate({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         profession: req.body.profession,
         email: req.body.email
-    });
-    // #2 DR: Added profession field to the new schema @Joseph
+       })
+    // 
 
     try {
         const newGraduate = await graduate.save();
@@ -36,7 +37,40 @@ router.post("/", async (req, res) => {
     }
 });
 
-//DR: For the most part everything is looking good, just communicate with team members 
-// about the names they are using in the code as well as file names and directory names -> Refering to #2
+// DR: You forgot to add try and catch to this and 
+// The handlers below and you shouldn't be using the Article model at
+// All.
+router.put('/:id', async (req, res) => {
+    try {
+const updatedArticle = await Graduate.findByIdAndUpdate(req.params.id, {
+        userName: req.body.userName,
+        profession: req.body.profession,
+        email: req.body.email
+    }, {
+        new: true
+    });
+
+res.status(200).json(updatedGraduate)
+} catch {
+
+    return res.status(404).send(`No message found with that ID`);
+
+    }
+
+});
+
+
+
+
+router.delete("/:id", async (req, res) => {
+    try {
+const deletedGraduate = await Graduate.findByIdAndRemove(req.params.id);
+    
+    return res.status(200).json(deleted Graduate);
+} catch {
+     return res.status(404).send(`No graduate found`);
+}
+})
+
 
 module.exports = router;

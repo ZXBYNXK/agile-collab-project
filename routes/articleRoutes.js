@@ -14,9 +14,29 @@ router.get("/", async (req, res) => {
 } )
 
 //Getting one article
-router.get("/:id",getArticle, (req,res)=> {
+router.get("/:id",getArticleById, (req,res)=> {
     res.json(res.article)
 });
+
+
+//Update article
+router.patch("/:id", getArticleById, async (req, res) => {
+    if (req.body.graduateName != null) {
+      res.article.graduateName = req.body.graduateName;
+    }
+    if (req.body.profession != null) {
+      res.article.profession = req.body.profession;
+    }
+    if (req.body.message != null) {
+      res.graduate.message= req.body.message;
+    }
+    try {
+      const updatedArticle = await res.article.save();
+      res.json(updatedArticle);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  });
 
 
 

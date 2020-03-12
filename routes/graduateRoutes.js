@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Graduate = require("../models/graduate");
-
+const Graduate = require("../models/Graduate");
+// DR: Capitalized graduate file name in the require above
 
 router.get("/", async (req, res) => {
     try {
@@ -17,12 +17,13 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
+   
     const graduate = new Graduate({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         profession: req.body.profession,
         email: req.body.email
-    });
+       })
     // 
 
     try {
@@ -36,22 +37,25 @@ router.post("/", async (req, res) => {
     }
 });
 
-
+// DR: You forgot to add try and catch to this and 
+// The handlers below and you shouldn't be using the Article model at
+// All.
 router.put('/:id', async (req, res) => {
-    const updatedMessage = await Message.findByIdAndUpdate(req.params.id, {
+    try {
+const updatedArticle = await Graduate.findByIdAndUpdate(req.params.id, {
         userName: req.body.userName,
         profession: req.body.profession,
-        email: req.body.email,
-        message: req.body.message
+        email: req.body.email
     }, {
         new: true
     });
 
+res.status(200).json(updatedGraduate)
+} catch {
 
+    return res.status(404).send(`No message found with that ID`);
 
-    if (!updatedMessage) return res.status(404).send(`No message found with that ID`);
-
-    res.json(updatedMessage);
+    }
 
 });
 
@@ -59,9 +63,13 @@ router.put('/:id', async (req, res) => {
 
 
 router.delete("/:id", async (req, res) => {
-    const message = await Message.findByIdAndRemove(req.params.id);
-    if (!message) return res.status(404).send(`No message found`);
-    res.json(message);
+    try {
+const deletedGraduate = await Graduate.findByIdAndRemove(req.params.id);
+    
+    return res.status(200).json(deleted Graduate);
+} catch {
+     return res.status(404).send(`No graduate found`);
+}
 })
 
 

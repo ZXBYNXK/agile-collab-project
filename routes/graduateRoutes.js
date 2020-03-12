@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
     try {
         const graduates = await Graduate.find();
         res.status(200).json(graduates);
-    // #1 DR: Added a status code to be returned to the client/browser
+
     } catch (err) {
         res.status(500).json({
             message: err.message
@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
         profession: req.body.profession,
         email: req.body.email
     });
-    // #2 DR: Added profession field to the new schema @Joseph
+    // 
 
     try {
         const newGraduate = await graduate.save();
@@ -36,7 +36,33 @@ router.post("/", async (req, res) => {
     }
 });
 
-//DR: For the most part everything is looking good, just communicate with team members 
-// about the names they are using in the code as well as file names and directory names -> Refering to #2
+
+router.put('/:id', async (req, res) => {
+    const updatedMessage = await Message.findByIdAndUpdate(req.params.id, {
+        userName: req.body.userName,
+        profession: req.body.profession,
+        email: req.body.email,
+        message: req.body.message
+    }, {
+        new: true
+    });
+
+
+
+    if (!updatedMessage) return res.status(404).send(`No message found with that ID`);
+
+    res.json(updatedMessage);
+
+});
+
+
+
+
+router.delete("/:id", async (req, res) => {
+    const message = await Message.findByIdAndRemove(req.params.id);
+    if (!message) return res.status(404).send(`No message found`);
+    res.json(message);
+})
+
 
 module.exports = router;

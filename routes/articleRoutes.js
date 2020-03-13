@@ -20,7 +20,7 @@ router.get("/:id",getArticleById, (req,res)=> {
 
 
 //Update article
-router.patch("/:id", getArticleById, async (req, res) => {
+router.put("/:id", getArticleById, async (req, res) => {
     if (req.body.graduateName != null) {
       res.article.graduateName = req.body.graduateName;
     }
@@ -58,7 +58,7 @@ router.post("/", async (req, res) => {
         
 });
 //Delete one article
-router.delete("/:id", getArticle,async (req,res)=> {
+router.delete("/:id", getArticleById,async (req,res)=> {
     try {
         await res.article.remove();
         res.json({ message: "deleted article"});

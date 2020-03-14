@@ -66,7 +66,7 @@ router.delete("/:id", async (req, res) => {
     try {
 const deletedGraduate = await Graduate.findByIdAndRemove(req.params.id);
     
-    return res.status(200).json(deleted Graduate);
+    return res.status(200).json(deletedGraduate);
 } catch {
      return res.status(404).send(`No graduate found`);
 }

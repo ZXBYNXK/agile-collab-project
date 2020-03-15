@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();
+require('dotenv/config')
 const DB_CONNECTION = process.env.DB_CONNECTION;
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2000;
 const enviroment =  process.env.NODE_ENV
 const graduatesRoute = require('./routes/graduateRoutes');
 const articleRoute = require('./routes/articleRoutes');
 
-enviroment.toLowerCase()
+//enviroment.toLowerCase()
 
 app.use(express.json());
 
@@ -36,5 +37,7 @@ app.get('/', (req, res) => {
   console.log(`Server listening on port ${PORT}`)
   });
 
+
+  
 
   

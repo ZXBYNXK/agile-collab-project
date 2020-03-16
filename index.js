@@ -14,10 +14,10 @@ app.use('/articleRoutes', articleRoute)
 
 
 
-app.get('/', (req, res) => {
-    res.status(200).render('index')
+// app.get('/', (req, res) => {
+//     res.status(200).render('index')
     
-  })
+//   })
   
   
   mongoose.connect(DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})

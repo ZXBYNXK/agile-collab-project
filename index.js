@@ -17,10 +17,7 @@ app.use('/articleRoutes', articleRoute)
 app.use(express.static("public"));
 
 
-app.get('/', (req, res) => {
-    res.status(200).render('index')
-    
-  })
+
   
   
   mongoose.connect(DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true})

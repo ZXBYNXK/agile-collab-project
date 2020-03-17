@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Graduate = require("../models/Graduate");
-// DR: Capitalized graduate file name in the require above
 
 router.get("/", async (req, res) => {
     try {
@@ -19,14 +18,21 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
-   
+    console.log(28, req.body)
     const graduate = new Graduate({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         profession: req.body.profession,
+        company: req.body.company,
+        graduationDate: req.body.graduationDate,
+        skills: req.body.skills,
+        linkedIn: req.body.linkedIn,
+        twitter: req.body.twitter,
         email: req.body.email
-       })
+   })
+
     // 
+    console.log(29, graduate)
 
     try {
         const newGraduate = await graduate.save();
@@ -39,15 +45,20 @@ router.post("/", async (req, res) => {
     }
 });
 
-// DR: You forgot to add try and catch to this and 
-// The handlers below and you shouldn't be using the Article model at
-// All.
+// DR: (3/14/20)
+//  Added missing feilds from my update to the Graduate Schema based on the form on the front-end.
 router.put('/:id', async (req, res) => {
     try {
-const updatedArticle = await Graduate.findByIdAndUpdate(req.params.id, {
-        userName: req.body.userName,
-        profession: req.body.profession,
-        email: req.body.email
+const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    profession: req.body.profession,
+    company: req.body.company,
+    graduationDate: req.body.graduationDate,
+    skills: req.body.skills,
+    linkedIn: req.body.linkedIn,
+    twitter: req.body.twitter,
+    email: req.body.email
     }, {
         new: true
     });

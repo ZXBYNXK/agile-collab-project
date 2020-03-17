@@ -14,7 +14,6 @@ app.use('/articleRoutes', articleRoute)
 
 
 
-
   
   
   mongoose.connect(DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})

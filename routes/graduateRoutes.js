@@ -15,6 +15,8 @@ router.get("/", async (req, res) => {
 });
 
 
+
+
 router.post("/", async (req, res) => {
     console.log(28, req.body)
     const graduate = new Graduate({

@@ -50,6 +50,18 @@ const createNewGraduate = () => {
     }).catch(err => console.log(err));
 }
 
+// GET SPECIFIC GRADUATE
+const getSpecificGraduate = () => {
+    const searchName = document.getElementById("searchName").value;
+    const url2 = `/graduateRoutes/${ searchName }`;
+    fetch(url2)
+    .then(response => {
+        return response.json()
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+}
+
 const getAllArticles = () => {
     const url = '/articleRoutes';
     fetch(url)

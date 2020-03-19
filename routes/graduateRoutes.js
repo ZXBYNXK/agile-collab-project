@@ -16,6 +16,29 @@ router.get("/", async (req, res) => {
 
 
 
+router.get("/:firstName", async (req, res) => {
+    const firstName = req.params.firstName;
+    const errors = {};
+    const nameError = await Graduate.find({ firstName: firstName });
+
+    res.send(nameError);
+});
+
+// router.get("/:firstName", getGraduate, (req, res) => {
+//     res.send(req.params.firstName)
+// })
+
+// router.get("/:firstName", async (req, res) => {
+//     try {
+//         const firstName = req.params.firstName;
+//         res.json(firstName);
+//     }catch (err) {
+//         res.status(500).json({ message: err.message });
+//     }
+// });
+
+
+
 
 router.post("/", async (req, res) => {
     console.log(28, req.body)
@@ -84,6 +107,20 @@ const deletedGraduate = await Graduate.findByIdAndRemove(req.params.id);
      return res.status(404).send(`No graduate found`);
 }
 })
+
+async function getGraduate(req, res, next) {
+    let graduate
+    try {
+        graduate = await Graduate.findById(req.params.id)
+        if (graduate == null)
+        return res.status(404).json({ message: 'Cannot find profile' })
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+
+    res.graduate = graduate;
+    next()
+}
 
 
 module.exports = router;

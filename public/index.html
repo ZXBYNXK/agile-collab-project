@@ -1,12 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <title>Document</title>
-</head>
-<body style="background-color: orange;">
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Graduate API</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" /> 
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+<style>
+footer {
+ font-family: 'Aclonica';font-size: 22px;
+}
+</style>
+  </head>
+
+  <body>
+    <h1>Sign up below to join our Graduate News Page!</h1>
+    <div class="container">
+    <section class = "col-12 col-sm-6 col -md - 3">
+      <form class= "form-container" id="register-form">
+        <h2>Create Your Graduate profile</h2>
+        <label for="firstName">First Name:</label><br />
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          name="firstName"
+          placeholder="Jane"
+          required
+        />
+        <br />
+        <label for="lastName">Last Name:</label><br />
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          name="lastName"
+          placeholder="Doe"
+          required
+          />
+        <br />
+        <label for="graduationDate">Graduation Date:</label><br />
+        <input
+          type="date"
+          class="form-control"
+          id="graduationDate"
+          name="graduationDate"
+        />
+        <br />
+        <label for="profession">List Your Profession</label><br />
+        <input
+          type="text"
+          class="form-control"
+          id="profession"
+          name="profession"
+          placeholder="e.g. Banker, Programmer... ( Optional )"
+        />
+        <br />
+        <label for="company">Company:</label><br />
+        <input
+          type="text"
+          class="form-control"
+          id="company"
+          name="company"
+          placeholder="Company you work for. ( Optional )"
+        />
+        <br />
+        <label for="skills">Skills:</label><br />
+        <textarea class="u-full-width" 
+        type="text" id="skills" 
+        class="form-control"
+        name="skills" 
+        placeholder="List skills that you are proud of. ( Optional )"></textarea>
+        <br />
+        <label for="email">Email:</label><br />
+        <input class="u-full-width" 
+        type="email" id="email" 
+        class="form-control"
+        name="email" 
+        placeholder="JaneDoe@Email.com" 
+        required/>
+        <br />
+        <label for="linkedIn">Your LinkedIn Profile:</label><br />
+        <input
+          type="text"
+          id="linkedIn"
+          class="form-control"
+          name="linkedIn"
+          placeholder="LinkedIn profile Link  ( Optional )"
+        />
+        <br />
+        <label for="twitter">Twitter:</label><br />
+        <input
+          type="text"
+          id="twitter"
+          class="form-control"
+          name="twitter"
+          placeholder="Twitter profile Link  ( Optional )"
+        />
+        <br /><br />
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="post-btn"
+          onclick="createNewGraduate()"
+          value="submit"
+        >
+          Submit Form
+        </button>
+
+        <div id="registered"></div>
+      </form>
+      <br /><br />
+      <h2>Find a Graduate</h2> 
+      <div class="form-group">
+        <!-- <form class="example">  -->
+        <form class= "form-container">
+        <input type="text" id="searchName" class="form-control" placeholder="Enter Graduate's Name" name="search" />
+        <br />
+        <button type="submit" id="search-btn" onclick="getSpecificGraduate()">Search</button>
+      </form>
+    </div>
+      <br /><br />
+      <h2>Show All Graduates</h2>
+      <button type="submit" id="get-btn" onclick="getAllGraduates()">
+        Click here
+      </button>
+    </section>
+      <div id="results"></div>
+    </div>
+    <footer>
+      <p>CREATED BY: CODE OF SILENCE</p>
+      <p>COPYRIGHT 2020</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
 </html>

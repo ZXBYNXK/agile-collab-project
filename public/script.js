@@ -52,6 +52,7 @@ const createNewGraduate = () => {
 
 // GET SPECIFIC GRADUATE
 const getSpecificGraduate = () => {
+    event.preventDefault();
     const searchName = document.getElementById("searchName").value;
     const url2 = `/graduateRoutes/${ searchName }`;
     fetch(url2)
@@ -107,3 +108,5 @@ class GraduateElement {
         return main;
     }
 }
+
+console.log(1, location.href)

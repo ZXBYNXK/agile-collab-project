@@ -63,6 +63,27 @@ const getSpecificGraduate = () => {
     .catch(err => console.log(err));
 }
 
+// delete a graduate
+const deleteGraduate = () => {
+    const graduateID = document.getElementById("_id").value;
+console.log(graduateID);
+    const deleteUrl = `/graduateRoutes/${graduateID}`;
+
+    fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).then(deletedGraduate => {
+        console.log(deletedGraduate);
+        return deletedGraduate;
+    }).catch(err => console.log(err));
+
+}
+
+
 const getAllArticles = () => {
     const url = '/articleRoutes';
     fetch(url)
@@ -72,6 +93,8 @@ const getAllArticles = () => {
             console.log(data)
         }).catch(err => console.log(err));
 }
+
+
 
 
 const makeJSON = (newGraduate) => {

@@ -23,7 +23,8 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    /* display: block; */
+    font-family: "Aclonica";
+    font-size: 22px;
     background-color: #3c3434;
     color: #dd5d5d;
     text-align: center;

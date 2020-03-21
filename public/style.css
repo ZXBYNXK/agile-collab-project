@@ -6,14 +6,21 @@
 
 }
 
-
-
-#flex {
+The whole entire
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
 }
+
+
+
+
+
+
+
+
 footer {
     left: 0;
     bottom: 0;

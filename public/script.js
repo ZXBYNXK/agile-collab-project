@@ -5,19 +5,19 @@ const getAllGraduates = () => {
         .then(response => {
             return response.json();
         }).then(data => {
-           // DR: Selecting the div element that will show the results 'parent'.
-           if(!parent.children.length > 0){
-            const displayGraduates = data.reverse().map(object => {
-            console.log(1, object)
-             // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
-             // See the 'GraduateElement' class below if confused on how this work.
-             parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
-        })
-    } else {
-        // This prevents the parent from appending the same informantion all over again. But rather hide it then show it.
-        if (parent.style.display === 'none')  parent.style.display = 'inline' 
-        else parent.style.display = 'none'
-    }
+            // DR: Selecting the div element that will show the results 'parent'.
+            if (!parent.children.length > 0) {
+                const displayGraduates = data.reverse().map(object => {
+                    console.log(1, object)
+                    // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
+                    // See the 'GraduateElement' class below if confused on how this work.
+                    parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
+                })
+            } else {
+                // This prevents the parent from appending the same informantion all over again. But rather hide it then show it.
+                if (parent.style.display === 'none') parent.style.display = 'inline'
+                else parent.style.display = 'none'
+            }
         }).catch(err => console.log(err));
 }
 //CREATE NEW GRADUATE : POST
@@ -54,19 +54,20 @@ const createNewGraduate = () => {
 const getSpecificGraduate = () => {
     event.preventDefault();
     const searchName = document.getElementById("searchName").value;
-    const url2 = `/graduateRoutes/${ searchName }`;
+    const url2 = `/graduateRoutes/${searchName}`;
     fetch(url2)
-    .then(response => {
-        return response.json()
-    })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+        .then(response => {
+            return response.json()
+        })
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
 }
 
 // delete a graduate
 const deleteGraduate = () => {
-    const graduateID = document.getElementById("_id").value;
-console.log(graduateID);
+    event.preventDefault();
+    const graduateID = document.getElementById("id").value;
+    // console.log(graduateID);
     const deleteUrl = `/graduateRoutes/${graduateID}`;
 
     fetch(deleteUrl, {
@@ -116,13 +117,13 @@ class GraduateElement {
 
         nameElement.innerText = ` ${firstName} ${lastName} \n`
         professionElement.innerText = `Profession: ${profession} \n`
-        companyElement.innerText =  `Employer: ${company} \n`;
+        companyElement.innerText = `Employer: ${company} \n`;
         graduationDateElement.innerText = `Date of graduation${graduationDate} \n`;
 
         main.style = 'padding: 20px'
         nameElement.style = 'font-weight: bold; text-decoration: none;'
         nameElement.setAttribute("href", "#") // The '#' will be changed to a link to another page that displays a graduate. For now it is a link that navigates no where.
-        
+
         main.appendChild(nameElement);
         main.appendChild(professionElement);
         main.appendChild(companyElement);
@@ -132,4 +133,4 @@ class GraduateElement {
     }
 }
 
-console.log(1, location.href)
+// console.log(1, location.href)

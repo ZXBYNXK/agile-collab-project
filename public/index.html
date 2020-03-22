@@ -118,11 +118,13 @@ footer {
       <div class="form-group">
         <!-- <form class="example">  -->
         <form class= "form-container">
-        <input type="text" class="form-control" placeholder="Enter Graduate's Name" name="search" />
-        <br />
-        <button type="submit">Search</button>
+          <input type="text" id="searchName" class="form-control" placeholder="Enter Graduate's Name" name="search" />
+          <br />
+          <button type="submit" id="search-btn" onclick="getSpecificGraduate()">Search</button>
       </form>
     </div>
+
+    <div id="searchResult"></div>
       <br /><br />
       <h2>Show All Graduates</h2>
       <button type="submit" id="get-btn" onclick="getAllGraduates()">

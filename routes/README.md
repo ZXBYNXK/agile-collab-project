@@ -1,4 +1,4 @@
-# Routes 
+# /routes 
 <!-- When making changes to this directory write about it in here. -->
 1. Created articleRoutes.js 
     - Added GET & POST routes for the Articles Collection which refers to the <a href="https://github.com/DariusRain/agile-collab-project/blob/master/models/Article.js">models/Aritcle.js</a> model.

@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 
-
+// DR: This route needs a try or catch block.
 router.get("/:firstName", async (req, res) => {
     const firstName = req.params.firstName;
     const errors = {};
@@ -23,19 +23,6 @@ router.get("/:firstName", async (req, res) => {
 
     res.send(nameError);
 });
-
-// router.get("/:firstName", getGraduate, (req, res) => {
-//     res.send(req.params.firstName)
-// })
-
-// router.get("/:firstName", async (req, res) => {
-//     try {
-//         const firstName = req.params.firstName;
-//         res.json(firstName);
-//     }catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// });
 
 
 
@@ -68,8 +55,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// DR: (3/14/20)
-//  Added missing feilds from my update to the Graduate Schema based on the form on the front-end.
+
 router.put('/:id', async (req, res) => {
     try {
 const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {

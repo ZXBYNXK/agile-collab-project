@@ -1,4 +1,4 @@
-# /public (Front-End)
+# /public 
 
 <!-- 
 When changes are made in this directory write about it in here. 

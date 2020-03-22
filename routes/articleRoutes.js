@@ -2,6 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Article = require("../models/Article");
 
+// Predifined Object that renders 404 errors. 
+const pug404 = {error: {message: '404 Not Found'}}
+const pug500 = {error: {messgae: '500 Server Error'}}
+
 //Getting all articles
 router.get("/", async (req, res) => {
     try {
@@ -9,7 +13,7 @@ router.get("/", async (req, res) => {
         res.status(200).json(article);
         // #1 DR: Added status code to the response - Not major but prefreable 
     } catch (err) {
-        res.status(500).json({message: err.message});
+        res.status(500).render('errors', pug500);
     }
 } )
 
@@ -21,7 +25,7 @@ router.get('/:id', async (req, res) => {
             const findArticle = await Article.findById(req.params.id)
              res.status(200).json(findArticle)
         } catch {
-            res.status(404).json({message: "404 Not Found"})
+            res.status(404).render('errors', pug404)
         }
     })
 
@@ -57,7 +61,7 @@ router.delete("/:id", async (req,res)=> {
         res.json({ message: "deleted article"});
     
     } catch (err) {
-        res.status(404).json({message: err.message});
+        res.status(404).render('errors', pug404)
     }
 });
 

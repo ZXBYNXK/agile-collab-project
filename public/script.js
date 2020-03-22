@@ -52,15 +52,32 @@ const createNewGraduate = () => {
 
 // GET SPECIFIC GRADUATE
 const getSpecificGraduate = () => {
+    event.preventDefault();
     const searchName = document.getElementById("searchName").value;
     const url2 = `/graduateRoutes/${ searchName }`;
     fetch(url2)
     .then(response => {
         return response.json()
     })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+       .then(data => {console.log(data)
+        data.map( object => { 
+            document.getElementById("searchResult").innerHTML += 
+            `<p> 
+                <div>${object.firstName}</div>
+                <div>${object.lastName}</div>  
+                <div>${object.email}</div>
+                <div>${object.profession}</div>  
+                <div>${object.company}</div> 
+                <div>${object.graduationDate}</div>  
+                <div>${object.skills}</div>  
+                <div>${object.linkedIn}</div>  
+                <div>${object.twitter}</div>  
+                
+            </p> `
+        })
+    }).catch(err => console.log(err));
 }
+
 
 const getAllArticles = () => {
     const url = '/articleRoutes';
@@ -107,3 +124,5 @@ class GraduateElement {
         return main;
     }
 }
+
+console.log(1, location.href)

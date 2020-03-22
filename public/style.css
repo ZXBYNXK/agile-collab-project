@@ -6,6 +6,14 @@
 
 }
 
+
+
+#flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
 footer {
     left: 0;
     bottom: 0;
@@ -14,4 +22,16 @@ footer {
     background-color: grey;
     color: white;
     text-align: center;
+
+
+}
+
+
+
+
+#register-form {
+    width: 88%
+/* vw vh  */
+/* veiw width veiw hight */
+    /* flex */
 }

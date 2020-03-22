@@ -1,4 +1,4 @@
-# Models 
+# /models 
 
 <!-- When changes are made in this directory write about it in here. -->
 1. Created Article.js (3/10/20)

@@ -1,3 +1,5 @@
+// import { response } from "express";
+
 const getAllGraduates = () => {
     const url = '/graduateRoutes';
     const parent = document.getElementById("results");

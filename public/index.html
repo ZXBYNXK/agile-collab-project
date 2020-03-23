@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Graduate API</title>
     <script src="script.js" defer></script>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -17,6 +18,7 @@
       href="https://fonts.googleapis.com/css?family=Aclonica"
       rel="stylesheet"
     />
+
   </head>
 
   <body>
@@ -131,13 +133,17 @@
       <h2>Find a Graduate</h2> 
       <div class="form-group">
         <!-- <form class="example">  -->
+
         <form class= "form-container" id="find-all-graduates">
         <input type="text" id="searchName" class="form-control" placeholder="Enter Graduate's Name" name="search" />
         <br />
         <button type="submit" onclick="getSpecificGraduate()">Search</button>
         <div id="displayGraduate"></div>
+
       </form>
     </div>
+
+    <div id="searchResult"></div>
       <br /><br />
        <!-- DELETE GRADUATE -->
        <h2>Enter ID to delete a Graduate</h2>

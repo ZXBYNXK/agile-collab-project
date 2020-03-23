@@ -1,5 +1,3 @@
-// import { response } from "express";
-
 const getAllGraduates = () => {
     const url = '/graduateRoutes';
     const parent = document.getElementById("results");
@@ -10,7 +8,7 @@ const getAllGraduates = () => {
            // DR: Selecting the div element that will show the results 'parent'.
            if(!parent.children.length > 0){
             const displayGraduates = data.reverse().map(object => {
-            // console.log(1, object)
+            console.log(1, object)
              // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
              // See the 'GraduateElement' class below if confused on how this work.
              parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
@@ -100,7 +98,6 @@ const deleteGraduate = () => {
         console.log(deletedGraduate);
         return deletedGraduate;
     }).catch(err => console.log(err));
-
 }
 
 

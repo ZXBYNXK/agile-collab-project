@@ -1,4 +1,4 @@
-    const getAllGraduates = () => {
+const getAllGraduates = () => {
     const url = '/graduateRoutes';
     const parent = document.getElementById("results");
     fetch(url)
@@ -8,7 +8,7 @@
            // DR: Selecting the div element that will show the results 'parent'.
            if(!parent.children.length > 0){
             const displayGraduates = data.reverse().map(object => {
-            // console.log(1, object)
+            console.log(1, object)
              // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
              // See the 'GraduateElement' class below if confused on how this work.
              parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
@@ -59,25 +59,25 @@ const getSpecificGraduate = () => {
     .then(response => {
         return response.json()
     })
-    .then(data =>
+       .then(data => {console.log(data)
+        data.map( object => { 
+            document.getElementById("searchResult").innerHTML += 
+            `<p> 
+                <div>${object.firstName}</div>
+                <div>${object.lastName}</div>  
+                <div>${object.email}</div>
+                <div>${object.profession}</div>  
+                <div>${object.company}</div> 
+                <div>${object.graduationDate}</div>  
+                <div>${object.skills}</div>  
+                <div>${object.linkedIn}</div>  
+                <div>${object.twitter}</div>  
+                
+            </p> `
+        })
+    }).catch(err => console.log(err));
+}
 
-    data.map( object => { 
-        document.getElementById("displayGraduate").innerHTML += 
-        `<p> 
-            <div>${object.firstName}</div>
-            <div>${object.lastName}</div>  
-            <div>${object.email}</div>
-            <div>${object.profession}</div>  
-            <div>${object.company}</div> 
-            <div>${object.graduationDate}</div>  
-            <div>${object.skills}</div>  
-            <div>${object.linkedIn}</div>  
-            <div>${object.twitter}</div>  
-            
-        </p> `
-    })
-    // .catch(err => console.log(err));
-    )}
 
 const getAllArticles = () => {
     const url = '/articleRoutes';

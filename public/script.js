@@ -56,14 +56,35 @@ const createNewGraduate = () => {
 const getSpecificGraduate = () => {
     event.preventDefault();
     const searchName = document.getElementById("searchName").value;
-    const url2 = `/graduateRoutes/${ searchName }`;
+    const url2 = `/graduateRoutes/${searchName}`;
     fetch(url2)
-    .then(response => {
-        return response.json()
-    })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+        .then(response => {
+            return response.json()
+        })
+        .then(data => console.log(data))
+        .catch(err => console.log(err));
 }
+
+// delete a graduate
+const deleteGraduate = () => {
+    event.preventDefault();
+    const graduateID = document.getElementById("id").value;
+    const deleteUrl = `/graduateRoutes/${graduateID}`;
+
+    fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).then(deletedGraduate => {
+        console.log(deletedGraduate);
+        return deletedGraduate;
+    }).catch(err => console.log(err));
+
+}
+
 
 const getAllArticles = () => {
     const url = '/articleRoutes';
@@ -74,6 +95,8 @@ const getAllArticles = () => {
             console.log(data)
         }).catch(err => console.log(err));
 }
+
+
 
 
 const makeJSON = (newGraduate) => {
@@ -95,13 +118,13 @@ class GraduateElement {
 
         nameElement.innerText = ` ${firstName} ${lastName} \n`
         professionElement.innerText = `Profession: ${profession} \n`
-        companyElement.innerText =  `Employer: ${company} \n`;
+        companyElement.innerText = `Employer: ${company} \n`;
         graduationDateElement.innerText = `Date of graduation${graduationDate} \n`;
 
         main.style = 'padding: 20px'
         nameElement.style = 'font-weight: bold; text-decoration: none;'
         nameElement.setAttribute("href", "#") // The '#' will be changed to a link to another page that displays a graduate. For now it is a link that navigates no where.
-        
+
         main.appendChild(nameElement);
         main.appendChild(professionElement);
         main.appendChild(companyElement);
@@ -111,4 +134,4 @@ class GraduateElement {
     }
 }
 
-console.log(1, location.href)
+// console.log(1, location.href)

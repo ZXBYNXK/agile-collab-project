@@ -20,8 +20,10 @@ const getAllGraduates = () => {
     }
         }).catch(err => console.log(err));
 }
-//CREATE NEW GRADUATE : POST
-const createNewGraduate = () => {
+
+
+//  CREATE NEW GRADUATE : POST
+async function createNewGraduate () {
     event.preventDefault()
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
@@ -50,41 +52,63 @@ const createNewGraduate = () => {
     }).catch(err => console.log(err));
 }
 
-// GET SPECIFIC GRADUATE
-const getSpecificGraduate = () => {
+
+// CX: GET SPECIFIC GRADUATE
+async function getSpecificGraduate() {
+
     event.preventDefault();
+
     const searchName = document.getElementById("searchName").value;
+
     const url2 = `/graduateRoutes/${ searchName }`;
+
     fetch(url2)
+
     .then(response => {
+
         return response.json()
-    })
-    .then(data =>
 
-    data.map( object => { 
+    })
+
+    .then(data => {
+     const display = data.map( object => { 
         document.getElementById("displayGraduate").innerHTML += 
+
         `<p> 
+
             <div>${object.firstName}</div>
+
             <div>${object.lastName}</div>  
+
             <div>${object.email}</div>
+
             <div>${object.profession}</div>  
+
             <div>${object.company}</div> 
+
             <div>${object.graduationDate}</div>  
+
             <div>${object.skills}</div>  
+
             <div>${object.linkedIn}</div>  
+
             <div>${object.twitter}</div>  
+
             
+
         </p> `
+
     })
+
     // .catch(err => console.log(err));
-    )}
 
+})
 
-
+}
 // delete a graduate
-const deleteGraduate = () => {
+async function deleteGraduate() {
     event.preventDefault();
-    const graduateID = document.getElementById("id").value;
+    const graduateID = document.getElementById("graduateId").value;
     const deleteUrl = `/graduateRoutes/${graduateID}`;
 
     fetch(deleteUrl, {
@@ -119,22 +143,27 @@ const makeJSON = (newGraduate) => {
 }
 
 //GS: Here is where I added the news API
-try {
-    const getTrendingNews = await fetch("http://newsapi.org/v2/top-headlines?country=us&apiKey=dd80dd8bf5ce4c67938429270d5b02bff")
-    const parsedJson = await getTrendingNews.json()
-    let amountText = document.getElementById("number-of-trending-articles") 
-    let count = 0;
-    let parent = document.getElementById("trending-articles-results")
-    const displayData = parsedJson.articles.map(object => {
-       const appended =  parent.appendChild(new Article(object.author || 'Anonymous', object.content || 'N/A' , object.description || 'N/A' , object.publishedAt || 'Anonymous' , object.source.name || 'Anonymous', object.title || 'No-title', object.url || '#', object.urlToImage || 'https://bit.ly/2Qi6yuZ'))
-        if (appended) {
-            ++count
-        }
-    })
-    amountText.innerText = count + ''
-} catch {
-    console.log(" Error in 'showTrendingArticle()' ")
+// Not done correctly @Georgina
+// const getApiArticles = async () => {
+// try {
+//     const getTrendingNews = await fetch("http://newsapi.org/v2/top-headlines?country=us&apiKey=dd80dd8bf5ce4c67938429270d5b02bff")
+//     const parsedJson = await getTrendingNews.json()
+//     // let amountText = document.getElementById("number-of-trending-articles") 
+//     let count = 0;
+//     // let parent = document.getElementById("trending-articles-results")
+//     const displayData = parsedJson.articles.map(object => {
+//         console.log(object)
+//         // if (appended) {
+//         //     ++count
+//         // }
+//     })
+//     // amountText.innerText = count + ''
+// } catch {
+//     console.log(" Error in 'showTrendingArticle()' ")
+// }
+// }
 
+// getApiArticles()
 // DR: Adding a class which will be used to construct a HTML element based on each object the 'getAllArticles'
 // Notice I am only including wsome feilds to keep it breif and if a user wants more information on a graduate then i can link them
 // to their page which will have the rest of the information.

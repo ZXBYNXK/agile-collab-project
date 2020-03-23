@@ -20,7 +20,9 @@ const getAllGraduates = () => {
     }
         }).catch(err => console.log(err));
 }
-//CREATE NEW GRADUATE : POST
+
+
+//  CREATE NEW GRADUATE : POST
 const createNewGraduate = () => {
     event.preventDefault()
     const firstName = document.getElementById("firstName").value;
@@ -50,18 +52,62 @@ const createNewGraduate = () => {
     }).catch(err => console.log(err));
 }
 
-// GET SPECIFIC GRADUATE
+
+// CX: GET SPECIFIC GRADUATE
 const getSpecificGraduate = () => {
+
     event.preventDefault();
+
     const searchName = document.getElementById("searchName").value;
-    const url2 = `/graduateRoutes/${searchName}`;
+
+    const url2 = `/graduateRoutes/${ searchName }`;
+
     fetch(url2)
-        .then(response => {
-            return response.json()
-        })
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-}
+
+    .then(response => {
+
+        return response.json()
+
+    })
+
+    .then(data =>
+
+​
+
+    data.map( object => { 
+
+        document.getElementById("displayGraduate").innerHTML += 
+
+        `<p> 
+
+            <div>${object.firstName}</div>
+
+            <div>${object.lastName}</div>  
+
+            <div>${object.email}</div>
+
+            <div>${object.profession}</div>  
+
+            <div>${object.company}</div> 
+
+            <div>${object.graduationDate}</div>  
+
+            <div>${object.skills}</div>  
+
+            <div>${object.linkedIn}</div>  
+
+            <div>${object.twitter}</div>  
+
+            
+
+        </p> `
+
+    })
+
+    // .catch(err => console.log(err));
+
+    )}
+
 
 // delete a graduate
 const deleteGraduate = () => {
@@ -117,7 +163,7 @@ try {
     amountText.innerText = count + ''
 } catch {
     console.log(" Error in 'showTrendingArticle()' ")
-
+}
 // DR: Adding a class which will be used to construct a HTML element based on each object the 'getAllArticles'
 // Notice I am only including wsome feilds to keep it breif and if a user wants more information on a graduate then i can link them
 // to their page which will have the rest of the information.

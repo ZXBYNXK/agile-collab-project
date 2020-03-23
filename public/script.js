@@ -8,7 +8,7 @@ const getAllGraduates = () => {
            // DR: Selecting the div element that will show the results 'parent'.
            if(!parent.children.length > 0){
             const displayGraduates = data.reverse().map(object => {
-            console.log(1, object)
+            // console.log(1, object)
              // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
              // See the 'GraduateElement' class below if confused on how this work.
              parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
@@ -59,25 +59,9 @@ const getSpecificGraduate = () => {
     .then(response => {
         return response.json()
     })
-       .then(data => {console.log(data)
-        data.map( object => { 
-            document.getElementById("searchResult").innerHTML += 
-            `<p> 
-                <div>${object.firstName}</div>
-                <div>${object.lastName}</div>  
-                <div>${object.email}</div>
-                <div>${object.profession}</div>  
-                <div>${object.company}</div> 
-                <div>${object.graduationDate}</div>  
-                <div>${object.skills}</div>  
-                <div>${object.linkedIn}</div>  
-                <div>${object.twitter}</div>  
-                
-            </p> `
-        })
-    }).catch(err => console.log(err));
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 }
-
 
 const getAllArticles = () => {
     const url = '/articleRoutes';
@@ -93,22 +77,6 @@ const getAllArticles = () => {
 const makeJSON = (newGraduate) => {
     return JSON.stringify(newGraduate);
 }
-try {
-    const getTrendingNews = await fetch("http://newsapi.org/v2/top-headlines?country=us&apiKey=dd80dd8bf5ce4c67938429270d5b02bff")
-    const parsedJson = await getTrendingNews.json()
-    let amountText = document.getElementById("number-of-trending-articles") 
-    let count = 0;
-    let parent = document.getElementById("trending-articles-results")
-    const displayData = parsedJson.articles.map(object => {
-       const appended =  parent.appendChild(new Article(object.author || 'Anonymous', object.content || 'N/A' , object.description || 'N/A' , object.publishedAt || 'Anonymous' , object.source.name || 'Anonymous', object.title || 'No-title', object.url || '#', object.urlToImage || 'https://bit.ly/2Qi6yuZ'))
-        if (appended) {
-            ++count
-        }
-    })
-    amountText.innerText = count + ''
-} catch {
-    console.log(" Error in 'showTrendingArticle()' ")
-} 
 
 // DR: Adding a class which will be used to construct a HTML element based on each object the 'getAllArticles'
 // Notice I am only including wsome feilds to keep it breif and if a user wants more information on a graduate then i can link them

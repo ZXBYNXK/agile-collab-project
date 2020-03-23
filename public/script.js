@@ -1,6 +1,4 @@
-// import { response } from "express";
-
-const getAllGraduates = () => {
+    const getAllGraduates = () => {
     const url = '/graduateRoutes';
     const parent = document.getElementById("results");
     fetch(url)
@@ -61,9 +59,25 @@ const getSpecificGraduate = () => {
     .then(response => {
         return response.json()
     })
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-}
+    .then(data =>
+
+    data.map( object => { 
+        document.getElementById("displayGraduate").innerHTML += 
+        `<p> 
+            <div>${object.firstName}</div>
+            <div>${object.lastName}</div>  
+            <div>${object.email}</div>
+            <div>${object.profession}</div>  
+            <div>${object.company}</div> 
+            <div>${object.graduationDate}</div>  
+            <div>${object.skills}</div>  
+            <div>${object.linkedIn}</div>  
+            <div>${object.twitter}</div>  
+            
+        </p> `
+    })
+    // .catch(err => console.log(err));
+    )}
 
 const getAllArticles = () => {
     const url = '/articleRoutes';

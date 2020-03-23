@@ -1,9 +1,0 @@
-{
-  "firstName": "John",
-  "lastName":"Doe",
-  "email": "fff@mail.com",
-  "profession": "Software Engineer",
-  "company": "Apple",
-  "graduationDate": "3-14-20",
-  "skills": "A B C D"
-}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Graduate API</title>
+<<<<<<< HEAD
     <script src="script.js" defer></script>
     <link
       rel="stylesheet"
@@ -17,6 +18,17 @@
       href="https://fonts.googleapis.com/css?family=Aclonica"
       rel="stylesheet"
     />
+=======
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" /> 
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+<style>
+footer {
+ font-family: 'Aclonica';font-size: 22px;
+}
+</style>
+>>>>>>> c03c2d4b0f7f7a3db7c1115ba22055ae05f0fc22
   </head>
 
   <body>
@@ -125,45 +137,24 @@
         </form>
         <br /><br />
 
-        <!-- FIND A SPECIFIC GRAD -->
-        <h2>Find a Graduate</h2>
-        <div class="form-group">
-          <!-- <form class="example">  -->
-          <form class="form-container">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Graduate's Name"
-              name="search"
-            />
-            <br />
-            <button type="submit">Search</button>
-          </form>
-        </div>
-        <br /><br />
-
-        <!-- DELETE GRADUATE -->
-        <h2>Enter ID to delete a Graduate</h2>
-        <div class="form-group">
-          <form class="form-container">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Enter Graduate's ID"
-            />
-            <br />
-            <button type="submit" id="delete" onclick="deleteGraduate()">
-              Click to Delete
-            </button>
-          </form>
-        </div>
-        <br /><br />
-        <!-- SHOW ALL GRADS: GET -->
-        <h2>Show All Graduates</h2>
-        <button type="submit" id="get-btn" onclick="getAllGraduates()">
-          Click here
-        </button>
-      </section>
+        <div id="registered"></div>
+      </form>
+      <br /><br />
+      <h2>Find a Graduate</h2> 
+      <div class="form-group">
+        <!-- <form class="example">  -->
+        <form class= "form-container" id="find-all-graduates">
+        <input type="text" class="form-control" placeholder="Enter Graduate's Name" name="search" />
+        <br />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+      <br /><br />
+      <h2>Show All Graduates</h2>
+      <button type="submit" id="get-btn" onclick="getAllGraduates()">
+        Click here
+      </button>
+    </section>
       <div id="results"></div>
     </div>
     <footer>

@@ -5,19 +5,19 @@ const getAllGraduates = () => {
         .then(response => {
             return response.json();
         }).then(data => {
-            // DR: Selecting the div element that will show the results 'parent'.
-            if (!parent.children.length > 0) {
-                const displayGraduates = data.reverse().map(object => {
-                    console.log(1, object)
-                    // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
-                    // See the 'GraduateElement' class below if confused on how this work.
-                    parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
-                })
-            } else {
-                // This prevents the parent from appending the same informantion all over again. But rather hide it then show it.
-                if (parent.style.display === 'none') parent.style.display = 'inline'
-                else parent.style.display = 'none'
-            }
+           // DR: Selecting the div element that will show the results 'parent'.
+           if(!parent.children.length > 0){
+            const displayGraduates = data.reverse().map(object => {
+            // console.log(1, object)
+             // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
+             // See the 'GraduateElement' class below if confused on how this work.
+             parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
+        })
+    } else {
+        // This prevents the parent from appending the same informantion all over again. But rather hide it then show it.
+        if (parent.style.display === 'none')  parent.style.display = 'inline' 
+        else parent.style.display = 'none'
+    }
         }).catch(err => console.log(err));
 }
 //CREATE NEW GRADUATE : POST

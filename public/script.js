@@ -56,14 +56,32 @@ const createNewGraduate = () => {
 const getSpecificGraduate = () => {
     event.preventDefault();
     const searchName = document.getElementById("searchName").value;
-    const url2 = `/graduateRoutes/${searchName}`;
+    const url2 = `/graduateRoutes/${ searchName }`;
     fetch(url2)
-        .then(response => {
-            return response.json()
-        })
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
-}
+    .then(response => {
+        return response.json()
+    })
+    .then(data =>
+
+    data.map( object => { 
+        document.getElementById("displayGraduate").innerHTML += 
+        `<p> 
+            <div>${object.firstName}</div>
+            <div>${object.lastName}</div>  
+            <div>${object.email}</div>
+            <div>${object.profession}</div>  
+            <div>${object.company}</div> 
+            <div>${object.graduationDate}</div>  
+            <div>${object.skills}</div>  
+            <div>${object.linkedIn}</div>  
+            <div>${object.twitter}</div>  
+            
+        </p> `
+    })
+    // .catch(err => console.log(err));
+    )}
+
+
 
 // delete a graduate
 const deleteGraduate = () => {

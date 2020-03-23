@@ -67,7 +67,6 @@ const getSpecificGraduate = () => {
 const deleteGraduate = () => {
     event.preventDefault();
     const graduateID = document.getElementById("id").value;
-    // console.log(graduateID);
     const deleteUrl = `/graduateRoutes/${graduateID}`;
 
     fetch(deleteUrl, {

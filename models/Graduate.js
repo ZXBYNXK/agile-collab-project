@@ -1,14 +1,11 @@
 const mongoose = require('mongoose');
 
 const graduateSchema = new mongoose.Schema({
-    firstName: {
+    graduateName: {
       type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
+
     email: {
         type: String,
         required: true,

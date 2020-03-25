@@ -28,15 +28,15 @@ router.get("/", async (req, res) => {
 
 
 
-// Find Graduates by first name.        //  <- DR: This route needs a try or catch block.
-router.get("/:firstName", async (req, res) => {
+// Find Graduates by graduateName.        //  <- DR: This route needs a try or catch block.
+router.get("/:graduateName", async (req, res) => {
     try {
     
-        const firstName = req.params.firstName;
+        const graduateName = req.params.graduateName;
     
         // const errors = {};       //  <- DR: Dont know what this is for. Will keep it comment if somebody needed it.
-        // const nameError = await Graduate.find({ firstName: firstName });         //  <- DR: Changed the variable name to 'ifNameFound' 
-        const ifNameFound = await Graduate.find({firstName: firstName})
+        // const nameError = await Graduate.find({ graduateName: graduateName });         //  <- DR: Changed the variable name to 'ifNameFound' 
+        const ifNameFound = await Graduate.find({graduateName: graduateName})
         
         // This checks if the above value is an empty array that means none found.
         // it dosent execute the catch block becuase there is no false value in an empty array.
@@ -59,8 +59,7 @@ router.get("/:firstName", async (req, res) => {
 router.post("/", async (req, res) => {
 
     const graduate = new Graduate({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        graduateName: req.body.graduateName,
         profession: req.body.profession,
         company: req.body.company,
         graduationDate: req.body.graduationDate,
@@ -90,8 +89,7 @@ router.post("/", async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
 const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    graduateName: req.body.graduateName,
     profession: req.body.profession,
     company: req.body.company,
     graduationDate: req.body.graduationDate,

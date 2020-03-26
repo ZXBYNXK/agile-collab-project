@@ -8,7 +8,7 @@ const getAllGraduates = () => {
            // DR: Selecting the div element that will show the results 'parent'.
            if(!parent.children.length > 0){
             const displayGraduates = data.reverse().map(object => {
-            // console.log(1, object)
+            console.log(1, object)
              // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
              // See the 'GraduateElement' class below if confused on how this work.
              parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
@@ -122,7 +122,6 @@ async function deleteGraduate() {
         console.log(deletedGraduate);
         return deletedGraduate;
     }).catch(err => console.log(err));
-
 }
 
 
@@ -142,6 +141,27 @@ const getAllArticles = () => {
 const makeJSON = (newGraduate) => {
     return JSON.stringify(newGraduate);
 }
+
+
+// CX API NEWS
+
+// const api = 'http://newsapi.org/v2/everything?q=';
+// const apiKey = "6e400e8253b34851bd569d65c5d2ea91"; 
+// const url = api + searchArticle + 'sortBy=popularity&' + apiKey;
+// const url = api + 'sortBy=popularity&apiKey=' + apiKey;
+
+const url2 = "https://newsapi.org/v2/sources?language=en&country=us&apiKey=6e400e8253b34851bd569d65c5d2ea91";
+const req = url2;
+
+fetch(req)
+    .then((response) => {
+        return (response.json())
+    })
+    .then(data => {
+            console.log(JSON.stringify(data))
+
+    }).catch (error => console.log(error));
+
 
 //GS: Here is where I added the news API
 // Not done correctly @Georgina
@@ -163,6 +183,7 @@ const makeJSON = (newGraduate) => {
 //     console.log(" Error in 'showTrendingArticle()' ")
 // }
 // }
+
 
 // getApiArticles()
 // DR: Adding a class which will be used to construct a HTML element based on each object the 'getAllArticles'

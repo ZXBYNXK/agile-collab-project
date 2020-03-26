@@ -8,13 +8,15 @@
 
 
 
-#flex {
+#flex-container {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-
+    width: 100%;
 }
-
+#flex-container form  {
+    width: 25vw;
+    margin: 20px;
+}
 body {
     background-color: rgb(155, 202, 176);
 }

@@ -155,11 +155,11 @@ const req = url2;
 
 fetch(req)
     .then((response) => {
-        console.log(response.json())
+        return (response.json())
     })
     .then(data => {
-            console.log(data)
-            document.getElementById('article').innerText = JSON.stringify(data);
+            console.log(JSON.stringify(data))
+
     }).catch (error => console.log(error));
 
 

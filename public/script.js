@@ -34,7 +34,8 @@ const getAllGraduates = () => {
 //  CREATE NEW GRADUATE : POST
 async function createNewGraduate() {
   event.preventDefault();
-  const graduateName = document.getElementById("graduateName").value;
+  const firstName = document.getElementById("firstName").value;
+  const lastName = document.getElementById("lastName").value;
   const email = document.getElementById("email").value;
   const profession = document.getElementById("profession").value;
   const company = document.getElementById("company").value;

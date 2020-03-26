@@ -142,6 +142,27 @@ const makeJSON = (newGraduate) => {
     return JSON.stringify(newGraduate);
 }
 
+
+// CX API NEWS
+
+// const api = 'http://newsapi.org/v2/everything?q=';
+// const apiKey = "6e400e8253b34851bd569d65c5d2ea91"; 
+// const url = api + searchArticle + 'sortBy=popularity&' + apiKey;
+// const url = api + 'sortBy=popularity&apiKey=' + apiKey;
+
+const url2 = "https://newsapi.org/v2/sources?language=en&country=us&apiKey=6e400e8253b34851bd569d65c5d2ea91";
+const req = url2;
+
+fetch(req)
+    .then((response) => {
+        console.log(response.json())
+    })
+    .then(data => {
+            console.log(data)
+            document.getElementById('article').innerText = JSON.stringify(data);
+    }).catch (error => console.log(error));
+
+
 //GS: Here is where I added the news API
 // Not done correctly @Georgina
 // const getApiArticles = async () => {
@@ -162,6 +183,7 @@ const makeJSON = (newGraduate) => {
 //     console.log(" Error in 'showTrendingArticle()' ")
 // }
 // }
+
 
 // getApiArticles()
 // DR: Adding a class which will be used to construct a HTML element based on each object the 'getAllArticles'

@@ -2,66 +2,69 @@ const express = require("express");
 const router = express.Router();
 const Graduate = require("../models/Graduate");
 
-router.get("/", async (req, res) => {
+// Predifined Object that renders 404 errors. 
+const pug404 = {error: {message: '404 Not Found'}}
+const pug500 = {error: {messgae: '500 Server Error'}}
+
+
+// Find and retrieve all graduate data. 
+router.get("/all", async (req, res) => {
+  
     try {
+
         const graduates = await Graduate.find();
         res.status(200).json(graduates);
 
+
     } catch (err) {
-        res.status(500).json({
-            message: err.message
-        });
+        
+        // Render 500 server error, becuase the above should work without any
+        // requirements from the client.
+        res.status(500).render('errors', pug500);
+    
     }
+
 });
 
 
 
-
-// Find Graduates by graduateName.        //  <- DR: This route needs a try or catch block.
-router.get("/:graduateName", async (req, res) => {
+// Find Graduates by first name.        //  <- DR: This route needs a try or catch block.
+router.get("/search/:searchQueryName", async (req, res) => {
     try {
     
-        const graduateName = req.params.graduateName;
+        const searchQuery = req.params.searchQueryName;
     
-        // const errors = {};       //  <- DR: Dont know what this is for. Will keep it comment if somebody needed it.
-        // const nameError = await Graduate.find({ graduateName: graduateName });         //  <- DR: Changed the variable name to 'ifNameFound' 
-        const ifNameFound = await Graduate.find({graduateName: graduateName})
-        
-        // This checks if the above value is an empty array that means none found.
-        // it dosent execute the catch block becuase there is no false value in an empty array.
-        if(ifNameFound.length > 0) {
-        res.status(200).json(ifNameFound);
+        const grads = await Graduate.find();
+
+        const filterNames = grads.filter(object => {
+            let fullName = `${object.firstName} ${object.lastName}`
+            if(fullName.includes(searchQuery)){
+                return object
+            }
+            console.log(1, req.params.firstName)
+        })
+
+        if(filterNames.length > 0) {
+            res.status(200).json(filterNames);
         } else {
-            res.status(404).render('errors', pug404)
+            res.status(404).json({message: 'No one found by that name.'})
         }
     } catch {
     
         // This line renders the errors.pug file with a 404 message. 
-        res.status(404).render('errors', pug404)
+        res.status(500).json(message, 'Server Error')
     
     }
+    
+});
 
 
-// router.get("/:firstName", getGraduate, (req, res) => {
-//     res.send(req.params.firstName)
-// })
+// Creates new graduates and saves them to the database.
+router.post("/post", async (req, res) => {
 
-// router.get("/:firstName", async (req, res) => {
-//     try {
-//         const firstName = req.params.firstName;
-//         res.json(firstName);
-//     }catch (err) {
-//         res.status(500).json({ message: err.message });
-//     }
-// });
-
-
-
-
-router.post("/", async (req, res) => {
-    console.log(28, req.body)
     const graduate = new Graduate({
-        graduateName: req.body.graduateName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         profession: req.body.profession,
         company: req.body.company,
         graduationDate: req.body.graduationDate,
@@ -71,26 +74,28 @@ router.post("/", async (req, res) => {
         email: req.body.email
    })
 
-    // 
-    console.log(29, graduate)
 
     try {
+
         const newGraduate = await graduate.save();
         res.status(201).json(newGraduate);
-    } catch (err) {
-        res.status(400).json({
 
+    } catch (err) {
+
+        res.status(400).json({
             message: err.message
         });
     }
 });
 
-// DR: (3/14/20)
-//  Added missing feilds from my update to the Graduate Schema based on the form on the front-end.
-router.put('/:id', async (req, res) => {
+
+
+// Update a graduate using the MongoDB ObjectId as a parameter in the URI.  
+router.put('/update/:id', async (req, res) => {
     try {
 const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {
-    graduateName: req.body.graduateName,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     profession: req.body.profession,
     company: req.body.company,
     graduationDate: req.body.graduationDate,
@@ -104,39 +109,22 @@ const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {
 
 res.status(200).json(updatedGraduate)
 } catch {
-
-    return res.status(404).send(`No message found with that ID`);
-
+    return res.status(404).render('errors', pug404);
     }
-
 });
 
 
 
-
-router.delete("/:id", async (req, res) => {
+// Update a graduate using the ObjectId from the database.  
+router.delete("/delete/:id", async (req, res) => {
     try {
 const deletedGraduate = await Graduate.findByIdAndRemove(req.params.id);
     
     return res.status(200).json(deletedGraduate);
 } catch {
-     return res.status(404).send(`No graduate found`);
+     return res.status(404).render('errors', pug404);
 }
 })
-
-async function getGraduate(req, res, next) {
-    let graduate
-    try {
-        graduate = await Graduate.findById(req.params.id)
-        if (graduate == null)
-        return res.status(404).json({ message: 'Cannot find profile' })
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
-    }
-
-    res.graduate = graduate;
-    next()
-}
 
 
 module.exports = router;

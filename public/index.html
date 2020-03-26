@@ -17,26 +17,39 @@
       href="https://fonts.googleapis.com/css?family=Aclonica"
       rel="stylesheet"
     />
-
   </head>
 
   <body>
     <!-- JF & GS: CREATE GRADUATE -->
+    <a style="text-decoration: none; font-size: x-large; text-align: center;" href="about.html">About Us</a>
+    <hr>  
     <h1>Sign up below to join our Graduate News Page!</h1>
-    <div class="container" id="flex">
-      <section class="col-12 col-sm-6 col -md - 3">
+ 
+    <section id="flex-container" class="col-12 col-sm-6 col -md - 3">
+        <div>
+        <h2>Create Your Graduate profile</h2>
+
         <form class="form-container" id="register-form">
-          <h2>Create Your Graduate profile</h2>
-          <label for="graduateName">Enter Your Name:</label><br />
+          <label for="firstName">First Name:</label><br />
           <input
             type="text"
             class="form-control"
-            id="graduateName"
-            name="graduateName"
-            placeholder="Jack Doe"
+            id="firstName"
+            name="firstName"
+            placeholder="Jane"
             required
           />
-          <br /><br />
+          <br />
+          <label for="lastName">Last Name:</label><br />
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            placeholder="Doe"
+            required
+          />
+          <br />
           <label for="graduationDate">Graduation Date:</label><br />
           <input
             type="date"
@@ -80,7 +93,7 @@
             id="email"
             class="form-control"
             name="email"
-            placeholder="JackDoe@Email.com"
+            placeholder="JaneDoe@Email.com"
             required
           />
           <br />
@@ -114,65 +127,65 @@
 
           <div id="registered"></div>
         </form>
-        <br /><br />
-        <!--  -->
-        <br /><br />
-
-        <!-- CX: Find a graduate  -->
-        <h2>Find a Graduate</h2>
-
-        <div class="form-group">
-          <!-- <form class="example">  -->
-
-          <form class="form-container" id="find-all-graduates">
-            <input
-              type="text"
-              id="searchName"
-              class="form-control"
-              placeholder="Enter Graduate's Name"
-              name="search"
-            />
-
-            <br />
-
-            <button type="submit" onclick="getSpecificGraduate()">
-              Search
-            </button>
-
-            <div id="displayGraduate"></div>
-          </form>
-        </div>
-
-        <!-- JF: DELETE GRADUATE -->
-        <h2>Enter ID to delete a Graduate</h2>
-        <div class="form-group">
-          <form class="form-container">
-            <input
-              id="graduateId"
-              type="text"
-              class="form-control"
-              placeholder="Enter Graduate's ID"
-            />
-            <br />
-            <button type="submit" id="delete" onclick="deleteGraduate()">
-              Click to Delete
-            </button>
-          </form>
         </div>
         <br /><br />
-        <h2>Show All Graduates</h2>
-        <button type="submit" id="get-btn" onclick="getAllGraduates()">
-          Click here
-        </button>
-      </section>
-      <div id="results"></div>
+<!--  -->
+      <br /><br />
+
+
+    <!-- CX: Find a graduate  -->
+
+    <div class="form-group">
+      <h2>Find a Graduate</h2> 
+
+      <!-- <form class="example">  -->
+
+      <form class= "form-container" id="find-all-graduates">
+
+      <input type="text" id="searchName" class="form-control" placeholder="Enter Graduate's Name" name="search" />
+
+      <br />
+
+      <button type="submit" onclick="getSpecificGraduate()">Search</button>
+
+      <div id="displayGraduate"></div>
+
+    </form>
+
     </div>
-    <br>
-    <h2>Search Articles</h2>
-    <!-- <input id='searchArticle' type='text' placeholder="Search Article"> -->
-    <!-- <button type='submit' id='article-btn' onclick='getAllArticles()'>Search</!-->
-    <div id='article'></div>
 
+
+       <!-- JF: DELETE GRADUATE -->
+       <div class="form-group">
+        <h2>Enter ID to delete a Graduate</h2>
+         <form class="form-container">
+           <input
+           id="graduateId"
+             type="text"
+             class="form-control"
+             placeholder="Enter Graduate's ID"
+           />
+           <br />
+           <button type="submit" id="delete" onclick="deleteGraduate()">
+             Click to Delete
+           </button>
+         </form>
+       </div>
+       <br /><br />
+       <div>
+      <h2>Show All Graduates</h2>
+      <button type="submit" id="get-btn" onclick="getAllGraduates()">
+        Click here
+      </button>
+            <div id="results"></div>
+      </div>
+    </section>
+    <div style="overflow: auto" >
+      <h2 style="text-align:center;">  Trending Articles </h2>
+        <span id="number-of-trending-articles" style="text-align:center;"></span>
+        <span  id="trending-articles-results"></span>
+      </div>
+  
     <footer>
       <p>CREATED BY: CODE OF SILENCE</p>
       <p>COPYRIGHT 2020</p>

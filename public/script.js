@@ -11,7 +11,7 @@ const getAllGraduates = () => {
             console.log(1, object)
              // This will append a new element to the parent parent which gets the element (index.html: <div id="results"></div>)
              // See the 'GraduateElement' class below if confused on how this work.
-             parent.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
+             parent.appendChild(new GraduateElement(object.graduateName, object.profession, object.company, object.graduationDate))
         })
     } else {
         // This prevents the parent from appending the same informantion all over again. But rather hide it then show it.
@@ -25,8 +25,7 @@ const getAllGraduates = () => {
 //  CREATE NEW GRADUATE : POST
 async function createNewGraduate () {
     event.preventDefault()
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
+    const graduateName = document.getElementById("graduateName").value;
     const email = document.getElementById("email").value;
     const profession = document.getElementById("profession").value;
     const company = document.getElementById("company").value;
@@ -42,7 +41,7 @@ async function createNewGraduate () {
             'Content-Type': 'application/json'
         },
 
-        body: makeJSON({ firstName, lastName, email, profession, company, graduationDate, skills, linkedIn, twitter })
+        body: makeJSON({ graduateName, email, profession, company, graduationDate, skills, linkedIn, twitter })
     }).then(response => {
         console.log(response)
         return response.json();
@@ -76,9 +75,7 @@ async function getSpecificGraduate() {
 
         `<p> 
 
-            <div>${object.firstName}</div>
-
-            <div>${object.lastName}</div>  
+            <div>${object.graduateName}</div> 
 
             <div>${object.email}</div>
 
@@ -190,7 +187,7 @@ fetch(req)
 // Notice I am only including wsome feilds to keep it breif and if a user wants more information on a graduate then i can link them
 // to their page which will have the rest of the information.
 class GraduateElement {
-    constructor(firstName, lastName, profession, company, graduationDate) {
+    constructor(graduateName, profession, company, graduationDate) {
         // Will use a 'div' ELement to contain all this information and 'div' is used very often becuase it can contain things in a box like structure. 
         // 'document.createElement' creates any html element by only its tag name not the '<' or '/>' added to it. Good for creating elements on the fly.
         let main = document.createElement('div');
@@ -199,7 +196,7 @@ class GraduateElement {
         let companyElement = document.createElement("span");
         let graduationDateElement = document.createElement("span");
 
-        nameElement.innerText = ` ${firstName} ${lastName} \n`
+        nameElement.innerText = ` ${graduateName} \n`
         professionElement.innerText = `Profession: ${profession} \n`
         companyElement.innerText = `Employer: ${company} \n`;
         graduationDateElement.innerText = `Date of graduation${graduationDate} \n`;

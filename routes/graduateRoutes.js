@@ -16,13 +16,31 @@ router.get("/", async (req, res) => {
 
 
 
-router.get("/:firstName", async (req, res) => {
-    const firstName = req.params.firstName;
-    const errors = {};
-    const nameError = await Graduate.find({ firstName: firstName });
 
-    res.send(nameError);
-});
+// Find Graduates by graduateName.        //  <- DR: This route needs a try or catch block.
+router.get("/:graduateName", async (req, res) => {
+    try {
+    
+        const graduateName = req.params.graduateName;
+    
+        // const errors = {};       //  <- DR: Dont know what this is for. Will keep it comment if somebody needed it.
+        // const nameError = await Graduate.find({ graduateName: graduateName });         //  <- DR: Changed the variable name to 'ifNameFound' 
+        const ifNameFound = await Graduate.find({graduateName: graduateName})
+        
+        // This checks if the above value is an empty array that means none found.
+        // it dosent execute the catch block becuase there is no false value in an empty array.
+        if(ifNameFound.length > 0) {
+        res.status(200).json(ifNameFound);
+        } else {
+            res.status(404).render('errors', pug404)
+        }
+    } catch {
+    
+        // This line renders the errors.pug file with a 404 message. 
+        res.status(404).render('errors', pug404)
+    
+    }
+
 
 // router.get("/:firstName", getGraduate, (req, res) => {
 //     res.send(req.params.firstName)
@@ -43,8 +61,7 @@ router.get("/:firstName", async (req, res) => {
 router.post("/", async (req, res) => {
     console.log(28, req.body)
     const graduate = new Graduate({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        graduateName: req.body.graduateName,
         profession: req.body.profession,
         company: req.body.company,
         graduationDate: req.body.graduationDate,
@@ -73,8 +90,7 @@ router.post("/", async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
 const updatedGraduate = await Graduate.findByIdAndUpdate(req.params.id, {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    graduateName: req.body.graduateName,
     profession: req.body.profession,
     company: req.body.company,
     graduationDate: req.body.graduationDate,

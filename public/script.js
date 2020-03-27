@@ -87,31 +87,52 @@ function getSpecificGraduate() {
       return response.json();
     })
     .then(data => {
-      const display = data.map(object => {
-        if (!object.message) {
-          document.getElementById("displayGraduate").innerHTML += `<div> 
+      let searchResultsDiv = document.getElementById("displayGraduate")
+      if(searchResultsDiv.hasChildNodes){
+      searchResultsDiv.querySelectorAll("*").forEach(child => child.remove())
+      }
+   
+        
+        if (!data.message) {
+          const display = data.map(object => {
+        // XSS Patch 
+        
 
-            <h3>${object.firstName} ${object.lastName}</h3> 
-            <ul>
-            <li> Email: ${object.email} </li>
-            <li> Profession: ${object.profession}</li>
-            <li> Comapny: ${object.company}</li>
-            <li> Graduation Date: ${object.graduationDate}</li>
-            <li> Skills: ${object.skills}</li>
-            <li> LinkedIn: ${object.linkedIn} </li>
-            <li> Twitter: ${object.twitter} </li>
+        // Previous vulnerability
+        //   document.getElementById("displayGraduate").innerHTML += `<div> 
+
+        //     <h3>${object.firstName} ${object.lastName}</h3> 
+        //     <ul>
+        //     <li> Email: ${object.email} </li>
+        //     <li> Profession: ${object.profession}</li>
+        //     <li> Comapny: ${object.company}</li>
+        //     <li> Graduation Date: ${object.graduationDate}</li>
+        //     <li> Skills: ${object.skills}</li>
+        //     <li> LinkedIn: ${object.linkedIn} </li>
+        //     <li> Twitter: ${object.twitter} </li>
             
-            </ul>
+        //     </ul>
 
-        </div> `;
+        // </div> `;
+
+
+          // DR: One way of handling the issue
+          // Use the same class that is used to display all graduates to display this specific graduate
+        searchResultsDiv.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
+        document.getElementById("displayGraduate")
+          });
         } else {
-          document.getElementById("displayGraduate").innerHTML += `<div>
-                <p>${object.message}</p>
+          // DR: Notice that it is safe to use .innerHTML here becuase the string being returned is always going to be the message 
+          // returned from the backend that only the developer should have access to.
+          // But if you want to be on the safe side you can always use an alternative.
+          document.getElementById("displayGraduate").innerHTML += `
+            <div style="background-color: white; border-radius: 12px; padding: 5px; color: red; text-align: center; border-style:solid; border-color:black; margin: 12px; font-size: large;">
+                <p>${data.message}</p>
             </div>
         
             `;
         }
-      });
+    
 
       // .catch(err => console.log(err));
     });
@@ -278,4 +299,5 @@ class Article {
     }
   }
   
+
 // console.log(1, location.href)

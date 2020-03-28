@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", type="text/css", href="/../../../style.css")
+    body
+    div(style=" width: 100%;")
+        a(href="../../", class="nav-anchor") Home
+        a(href="about.html" class="nav-anchor")
+        hr
+    br
+    div
+        h1 #{firstName} #{lastName}
+        if profession
+            h3 Profession: #{profession}
+        
+        if graduationDate
+            h3 Graduated: #{graduationDate}
+        
+        if company
+            h3 Current Employer: #{company}
+        
+        if skills
+            h3 Skills
+            p #{skills}
+        br
+        h3 Contact
+        ul
+            li Email: #{email}
+            if linkedIn 
+                li LinkedIn: #{linkedIn}
+            if twitter
+                li Twitter: #{twitter}        

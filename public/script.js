@@ -18,7 +18,8 @@ const getAllGraduates = () => {
               object.lastName,
               object.profession,
               object.company,
-              object.graduationDate
+              object.graduationDate,
+              object._id
             )
           );
         });
@@ -87,52 +88,57 @@ function getSpecificGraduate() {
       return response.json();
     })
     .then(data => {
-      let searchResultsDiv = document.getElementById("displayGraduate")
-      if(searchResultsDiv.hasChildNodes){
-      searchResultsDiv.querySelectorAll("*").forEach(child => child.remove())
+      let searchResultsDiv = document.getElementById("displayGraduate");
+      if (searchResultsDiv.hasChildNodes) {
+        searchResultsDiv.querySelectorAll("*").forEach(child => child.remove());
       }
-   
-        
-        if (!data.message) {
-          const display = data.map(object => {
-        // XSS Patch 
-        
 
-        // Previous vulnerability
-        //   document.getElementById("displayGraduate").innerHTML += `<div> 
+      if (!data.message) {
+        const display = data.map(object => {
+          // XSS Patch
 
-        //     <h3>${object.firstName} ${object.lastName}</h3> 
-        //     <ul>
-        //     <li> Email: ${object.email} </li>
-        //     <li> Profession: ${object.profession}</li>
-        //     <li> Comapny: ${object.company}</li>
-        //     <li> Graduation Date: ${object.graduationDate}</li>
-        //     <li> Skills: ${object.skills}</li>
-        //     <li> LinkedIn: ${object.linkedIn} </li>
-        //     <li> Twitter: ${object.twitter} </li>
-            
-        //     </ul>
+          // Previous vulnerability
+          //   document.getElementById("displayGraduate").innerHTML += `<div>
 
-        // </div> `;
+          //     <h3>${object.firstName} ${object.lastName}</h3>
+          //     <ul>
+          //     <li> Email: ${object.email} </li>
+          //     <li> Profession: ${object.profession}</li>
+          //     <li> Comapny: ${object.company}</li>
+          //     <li> Graduation Date: ${object.graduationDate}</li>
+          //     <li> Skills: ${object.skills}</li>
+          //     <li> LinkedIn: ${object.linkedIn} </li>
+          //     <li> Twitter: ${object.twitter} </li>
 
+          //     </ul>
+
+          // </div> `;
 
           // DR: One way of handling the issue
           // Use the same class that is used to display all graduates to display this specific graduate
-        searchResultsDiv.appendChild(new GraduateElement(object.firstName, object.lastName, object.profession, object.company, object.graduationDate))
-        document.getElementById("displayGraduate")
-          });
-        } else {
-          // DR: Notice that it is safe to use .innerHTML here becuase the string being returned is always going to be the message 
-          // returned from the backend that only the developer should have access to.
-          // But if you want to be on the safe side you can always use an alternative.
-          document.getElementById("displayGraduate").innerHTML += `
+          searchResultsDiv.appendChild(
+            new GraduateElement(
+              object.firstName,
+              object.lastName,
+              object.profession,
+              object.company,
+              object.graduationDate,
+              object._id
+            )
+          );
+          document.getElementById("displayGraduate");
+        });
+      } else {
+        // DR: Notice that it is safe to use .innerHTML here becuase the string being returned is always going to be the message
+        // returned from the backend that only the developer should have access to.
+        // But if you want to be on the safe side you can always use an alternative.
+        document.getElementById("displayGraduate").innerHTML += `
             <div style="background-color: white; border-radius: 12px; padding: 5px; color: red; text-align: center; border-style:solid; border-color:black; margin: 12px; font-size: large;">
                 <p>${data.message}</p>
             </div>
         
             `;
-        }
-    
+      }
 
       // .catch(err => console.log(err));
     });
@@ -183,26 +189,39 @@ const makeJSON = newGraduate => {
 // const url = api + 'sortBy=popularity&apiKey=' + apiKey;
 
 (async function showTrendingArticles() {
-    const date = new Date()
-    const todaysDate = date.toISOString().slice(0, 10)
-    console.log(todaysDate)
-    try {
-        const getTrendingNews = await fetch(`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=6017031fdb37416997959671d521b753`)
-        const parsedJson = await getTrendingNews.json()
-        let amountText = document.getElementById("number-of-trending-articles") 
-        let count = 0;
-        let parent = document.getElementById("trending-articles-results")
-        const displayData = parsedJson.articles.map(object => {
-           const appended =  parent.appendChild(new Article(object.author || 'Anonymous', object.content || 'N/A' , object.description || 'N/A' , object.publishedAt || 'Anonymous' , object.source.name || 'Anonymous', object.title || 'No-title', object.url || '#', object.urlToImage || 'https://bit.ly/2Qi6yuZ'))
-            if (appended) {
-                ++count
-            }
-        })
-        amountText.innerText = count + ''
-    } catch {
-        console.log(" Error in 'showTrendingArticle()' ")
-    }
-  })()
+  const date = new Date();
+  const todaysDate = date.toISOString().slice(0, 10);
+  console.log(todaysDate);
+  try {
+    const getTrendingNews = await fetch(
+      `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=6017031fdb37416997959671d521b753`
+    );
+    const parsedJson = await getTrendingNews.json();
+    let amountText = document.getElementById("number-of-trending-articles");
+    let count = 0;
+    let parent = document.getElementById("trending-articles-results");
+    const displayData = parsedJson.articles.map(object => {
+      const appended = parent.appendChild(
+        new Article(
+          object.author || "Anonymous",
+          object.content || "N/A",
+          object.description || "N/A",
+          object.publishedAt || "Anonymous",
+          object.source.name || "Anonymous",
+          object.title || "No-title",
+          object.url || "#",
+          object.urlToImage || "https://bit.ly/2Qi6yuZ"
+        )
+      );
+      if (appended) {
+        ++count;
+      }
+    });
+    amountText.innerText = count + "";
+  } catch {
+    console.log(" Error in 'showTrendingArticle()' ");
+  }
+})();
 //GS: Here is where I added the news API
 // Not done correctly @Georgina
 // const getApiArticles = async () => {
@@ -231,7 +250,7 @@ const makeJSON = newGraduate => {
 //  Notice I am only including wsome feilds to keep it breif and if a user wants more information on a graduate then i can link them
 //  to their page which will have the rest of the information.
 class GraduateElement {
-  constructor(firstName, lastName, profession, company, graduationDate) {
+  constructor(firstName, lastName, profession, company, graduationDate, mongoId) {
     // Will use a 'div' ELement to contain all this information and 'div' is used very often becuase it can contain things in a box like structure.
     // 'document.createElement' creates any html element by only its tag name not the '<' or '/>' added to it. Good for creating elements on the fly.
     let main = document.createElement("div");
@@ -247,57 +266,68 @@ class GraduateElement {
 
     main.style = "padding: 20px";
     nameElement.style = "font-weight: bold; text-decoration: none;";
-    nameElement.setAttribute("href", "#"); // The '#' will be changed to a link to another page that displays a graduate. For now it is a link that navigates no where.
-
+    // DR: Added href attribute to GET the endpoint for a graduate's public profile, depending on the given id as the route parameter.
+   // The view engine will render public-profile.pug or errors.pug 404 not found
+    nameElement.setAttribute("href", `http://${location.hostname}:5000/graduateRoutes/public-profile/${mongoId}`);
     main.appendChild(nameElement);
     main.appendChild(professionElement);
     main.appendChild(companyElement);
-    main.appendChild(graduationDateElement);
-
+    main.appendChild(graduationDateElement)
     return main;
   }
 }
 class Article {
-    constructor(urlOrAuthor, content, description, date, nameOfNewsCompany, title, url, url2Image) {
-        let containerForArticle = document.createElement("div")
-        let articleTitle = document.createElement("a")
-        let articleContent = document.createElement("p")
-        let articleDescription = document.createElement("p")
-        let articleDate = document.createElement("p");
-        let articleNameOfNewsCompany = document.createElement("a")
-        let urlImage = document.createElement("img")
-        let articleAuthor = document.createElement("p")
-        containerForArticle.style = 'display: flex; flex-direction: column;  justify-content: space-evenly;  margin: 12px; padding: 8px; text-align: center;'
-        articleTitle.style = 'text-decoration: underline; font-size: 20px; font-weight: bold;'
-        articleDate.style = 'font-weight: bold;'
-        articleNameOfNewsCompany.style = 'font-style: italic;'
-        articleTitle.innerText = title 
-        // articleContent.innerText = `${content.slice(0, content.indexOf('.'))} ...`
-        articleDate.innerText = new Date(date);
-        articleDescription.innerText = description
-        articleNameOfNewsCompany.innerText = nameOfNewsCompany;
-  
-  
-        articleAuthor.innerText = `Author: ${urlOrAuthor}`;
-        const dotAllowed = ['.com', '.org', '.net', '.gov', '.edu', '.co.uk']
-        const check = dotAllowed.some(str => {  return nameOfNewsCompany.includes(str) })
-        if(check) {
-            articleNameOfNewsCompany.setAttribute("href", nameOfNewsCompany + "")
-        }
-        articleTitle.setAttribute("href", url)
-        urlImage.setAttribute("src", url2Image)
-        urlImage.style = ' width: 50vw; margin: 0 auto;'
-        containerForArticle.appendChild(urlImage)
-        containerForArticle.appendChild(articleTitle)
-        containerForArticle.appendChild(articleDate)
-        // containerForArticle.appendChild(articleContent)
-        containerForArticle.appendChild(articleDescription)
-        containerForArticle.appendChild(articleAuthor)
-        containerForArticle.appendChild(articleNameOfNewsCompany)
-        
-        return containerForArticle;
+  constructor(
+    urlOrAuthor,
+    content,
+    description,
+    date,
+    nameOfNewsCompany,
+    title,
+    url,
+    url2Image
+  ) {
+    let containerForArticle = document.createElement("div");
+    let articleTitle = document.createElement("a");
+    let articleContent = document.createElement("p");
+    let articleDescription = document.createElement("p");
+    let articleDate = document.createElement("p");
+    let articleNameOfNewsCompany = document.createElement("a");
+    let urlImage = document.createElement("img");
+    let articleAuthor = document.createElement("p");
+    containerForArticle.style =
+      "display: flex; flex-direction: column;  justify-content: space-evenly;  margin: 12px; padding: 8px; text-align: center;";
+    articleTitle.style =
+      "text-decoration: underline; font-size: 20px; font-weight: bold;";
+    articleDate.style = "font-weight: bold;";
+    articleNameOfNewsCompany.style = "font-style: italic;";
+    articleTitle.innerText = title;
+    // articleContent.innerText = `${content.slice(0, content.indexOf('.'))} ...`
+    articleDate.innerText = new Date(date);
+    articleDescription.innerText = description;
+    articleNameOfNewsCompany.innerText = nameOfNewsCompany;
+
+    articleAuthor.innerText = `Author: ${urlOrAuthor}`;
+    const dotAllowed = [".com", ".org", ".net", ".gov", ".edu", ".co.uk"];
+    const check = dotAllowed.some(str => {
+      return nameOfNewsCompany.includes(str);
+    });
+    if (check) {
+      articleNameOfNewsCompany.setAttribute("href", nameOfNewsCompany + "");
     }
+    articleTitle.setAttribute("href", url);
+    urlImage.setAttribute("src", url2Image);
+    urlImage.style = " width: 50vw; margin: 0 auto;";
+    containerForArticle.appendChild(urlImage);
+    containerForArticle.appendChild(articleTitle);
+    containerForArticle.appendChild(articleDate);
+    // containerForArticle.appendChild(articleContent)
+    containerForArticle.appendChild(articleDescription);
+    containerForArticle.appendChild(articleAuthor);
+    containerForArticle.appendChild(articleNameOfNewsCompany);
+
+    return containerForArticle;
   }
-  
+}
 
 // console.log(1, location.href)

@@ -1,42 +1,53 @@
 .form-container {
-    background: #b04949;
-    padding: 30px;
-    border-radius:10px;
-    box-shadow: 10px 10px 10px 10px #4a3030;
-
+  background: #b04949;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 10px #4a3030;
 }
-
-
 
 #flex-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
-#flex-container form  {
-    width: 25vw;
-    margin: 20px;
+#flex-container form {
+  width: 25vw;
+  margin: 20px;
 }
 body {
-    background-color: rgb(155, 202, 176);
+  background-color: rgb(155, 202, 176);
 }
 
 footer {
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    font-family: "Aclonica";
-    font-size: 22px;
-    background-color: #3c3434;
-    color: #dd5d5d;
-    text-align: center;
-
-
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-family: "Aclonica";
+  font-size: 22px;
+  background-color: #3c3434;
+  color: #dd5d5d;
+  text-align: center;
 }
 
+.nav-anchor {
+  text-decoration: none;
+  font-size: xx-large;
+  color: #dd5d5d;
+  background-color: white;
+  text-align: center;
+  
+  padding: 3px;
+}
+
+.nav-anchor:hover {
+
+    color: rgb(155, 202, 176);
+
+  }
+
 #register-form {
-    width: 88%
-/* vw vh  */
-/* veiw width veiw hight */
-    /* flex */
+  width: 88%;
+  /* vw vh  */
+  /* veiw width veiw hight */
+  /* flex */
 }

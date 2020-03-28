@@ -59,6 +59,17 @@ router.get("/search/:searchQueryName", async (req, res) => {
 });
 
 
+router.get('/public-profile/:id', async (req, res) => {
+    try {
+        const graduate = await Graduate.findById(req.params.id)
+        res.status(200).render('public-profile', graduate)
+    } catch {
+        res.status(404).render('errors', pug404)
+    }
+})
+
+
+
 // Creates new graduates and saves them to the database.
 router.post("/post", async (req, res) => {
 

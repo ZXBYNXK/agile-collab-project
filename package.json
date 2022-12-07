@@ -19,7 +19,7 @@
   "homepage": "https://github.com/DariusRain/agile-collab-project#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "mongoose": "^5.9.4",
     "nodemon": "^2.0.2",
     "pug": "^2.0.4"
